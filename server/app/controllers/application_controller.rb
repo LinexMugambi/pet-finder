@@ -1,8 +1,8 @@
 class ApplicationController < Sinatra::Base
-    set :default_content_type, "application/json"
-    enable :sessions
+  set :default_content_type, "application/json"
+  enable :sessions
 
-     # Add user
+  # Add user
   post "/user/register" do
     begin
       user =
@@ -44,27 +44,29 @@ class ApplicationController < Sinatra::Base
     session[:user_id] = nil
     { message: "Logout successfully" }.to_json
   end
-    # Add pet
-    post "/add/pet" do
-        user = User.find_by(id: session[:user_id])
-        if user
-          pet =
-            Pet.create(
-              name: params[:name],
-              breed: params[:breed],
-              age: params[:age],
-              user_id: user.id,
-            )
-          if pet.valid?
-            { message: "Pet added successfully" }.to_json
-          else
-            { error: "Failed to add pet" }.to_json
-          end
-        else
-          { error: "You must be logged in to add a pet" }.to_json
-        end
+
+  # Add pet
+  post "/add/pet" do
+    user = User.find_by(id: session[:user_id])
+    if user
+      pet =
+        Pet.create(
+          name: params[:name],
+          breed: params[:breed],
+          age: params[:age],
+          user_id: user.id,
+        )
+      if pet.valid?
+        { message: "Pet added successfully" }.to_json
+      else
+        { error: "Failed to add pet" }.to_json
       end
-      View all pets
+    else
+      { error: "You must be logged in to add a pet" }.to_json
+    end
+  end
+
+  # View all pets
   get "/pets" do
       pets = Pet.all
       pets.to_json
@@ -79,16 +81,17 @@ class ApplicationController < Sinatra::Base
     else
       { error: "You must be logged in to view your pets" }.to_json
     end
-  end 
-   # Search pets by name
-   get "/pets/search/name/:name" do
-    pets = Pet.where("name LIKE ?", "%#{params[:name]}%")
+  end
+
+  # Search pets by name
+  get "/pets/search/name/:name" do
+    pets = Pet.where("name LIKE ?", "#{params[:name]}%")
     pets.to_json
   end
 
   # Search pets by breed
   get "/pets/search/breed/:breed" do
-    pets = Pet.where("breed LIKE ?", "%#{params[:breed]}%")
+    pets = Pet.where("breed LIKE ?", "#{params[:breed]}%")
     pets.to_json
   end
 
