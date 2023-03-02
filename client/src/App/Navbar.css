@@ -26,4 +26,15 @@
     color: white;
     font-weight: bold;
   }
+  .Navbar a.navbar-brand:nth-child(1) {
+    color: #ff0080;
+  }
+  
+  .Navbar a.navbar-brand:nth-child(2) {
+    color: #00a8ff;
+  }
+  
+  .Navbar a.navbar-brand:nth-child(3) {
+    color: #1abc9c;
+  }
   
