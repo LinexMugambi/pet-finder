@@ -80,3 +80,42 @@ class ApplicationController < Sinatra::Base
       { error: "You must be logged in to view your pets" }.to_json
     end
   end 
+   # Search pets by name
+   get "/pets/search/name/:name" do
+    pets = Pet.where("name LIKE ?", "%#{params[:name]}%")
+    pets.to_json
+  end
+
+  # Search pets by breed
+  get "/pets/search/breed/:breed" do
+    pets = Pet.where("breed LIKE ?", "%#{params[:breed]}%")
+    pets.to_json
+  end
+
+  # Update pet details
+  put "/pets/update/:id" do
+    pet = Pet.find(params[:id])
+    if pet.user_id == session[:user_id]
+      pet.update(
+        name: params[:name],
+        breed: params[:breed],
+        age: params[:age],
+        description: params[:description],
+      )
+      pet.to_json
+    else
+      { error: "You are not authorized to update this pet" }.to_json
+    end
+  end
+
+  # Delete pet
+  delete "/pets/delete/:id" do
+    pet = Pet.find(params[:id])
+    if pet.user_id == session[:user_id]
+      pet.destroy
+      { message: "Pet deleted successfully" }.to_json
+    else
+      { error: "You are not authorized to delete this pet" }.to_json
+    end
+  end
+end
