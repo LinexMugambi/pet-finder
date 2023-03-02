@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "client/package.json",
+        "use": "@vercel/node",
+        "config": {
+          "maxLambdaSize": "50mb"
+        }
+      },
+      {
+        "src": "server/**/*.rb",
+        "use": "@vercel/ruby"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "server/api/$1.rb"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "client/$1"
+      }
+    ]
+  }
+  
