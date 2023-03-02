@@ -44,4 +44,23 @@ class ApplicationController < Sinatra::Base
     session[:user_id] = nil
     { message: "Logout successfully" }.to_json
   end
-  
+    # Add pet
+    post "/add/pet" do
+        user = User.find_by(id: session[:user_id])
+        if user
+          pet =
+            Pet.create(
+              name: params[:name],
+              breed: params[:breed],
+              age: params[:age],
+              user_id: user.id,
+            )
+          if pet.valid?
+            { message: "Pet added successfully" }.to_json
+          else
+            { error: "Failed to add pet" }.to_json
+          end
+        else
+          { error: "You must be logged in to add a pet" }.to_json
+        end
+      end
