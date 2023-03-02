@@ -27,3 +27,21 @@ class ApplicationController < Sinatra::Base
       { error: "Regestration failed" }.to_json
     end
   end
+
+  # Login
+  post "/user/login" do
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      { message: "Logged in successfully" }.to_json
+    else
+      { error: "Invalid email or password" }.to_json
+    end
+  end
+
+  # Logout
+  post "/user/logout" do
+    session[:user_id] = nil
+    { message: "Logout successfully" }.to_json
+  end
+  
