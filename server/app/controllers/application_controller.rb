@@ -64,3 +64,19 @@ class ApplicationController < Sinatra::Base
           { error: "You must be logged in to add a pet" }.to_json
         end
       end
+      View all pets
+  get "/pets" do
+      pets = Pet.all
+      pets.to_json
+  end
+
+  # View all pets for current user
+  get "/pets/user" do
+    user = User.find_by(id: session[:user_id])
+    if user
+      pets = user.pets
+      pets.to_json
+    else
+      { error: "You must be logged in to view your pets" }.to_json
+    end
+  end 
