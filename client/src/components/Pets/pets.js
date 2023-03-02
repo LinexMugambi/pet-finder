@@ -1,5 +1,5 @@
 import axios from "axios";
-import DisplayPets from "./dispalypets";
+import DisplayPets from "./displaypets";
 import React, { useState, useEffect } from "react";
 
 const URL = "https://pet-finder-9j4w.onrender.com/pets";
@@ -15,7 +15,7 @@ export default function Pets() {
 
   return (
     <div>
-<h1>Adoptive, Foster happines</h1>
+<h1>Animal Haven</h1>
     <div className="pets">
       {pets.map((newpets)=>{
         console.log(newpets);
