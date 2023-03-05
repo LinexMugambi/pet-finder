@@ -20,7 +20,7 @@ export default function Pets() {
 
   return (
     <div>
-      <h1>Animal Haven</h1>
+       <h1>Animal Haven</h1>
       <div className="pets ">
         {pets.map((newpets) => {
           return (
@@ -44,3 +44,4 @@ export default function Pets() {
     </div>
   );
 }
+
