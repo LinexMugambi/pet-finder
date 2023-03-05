@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function  SearchData({name , age , species , breed , image , gender , description }) {
+export default function  SearchData({name , species , image  , description }) {
   return (
     <div>
-      <div className="card" style={{width: "18rem"}}>
+      <div className="card">
         <img src= {image} className="card-img-top" alt="..." />
         <div className="card-body">
           <h3 className="card-title"> Name: {name}</h3>
