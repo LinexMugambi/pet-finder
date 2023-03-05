@@ -8,9 +8,8 @@ export default function HomepageNavbar() {
       <nav className="navbar bg-body-tertiary" >
         <div className="container-fluid " id="homepagenav">
           <a href="l" className="navbar-brand">
-            WELCOME TO PET FINDER
+            WELCOME TO ANIMAL HAVEN
           </a>
-           <h3>Licence</h3>
           <button onClick={(e)=>{
             e.preventDefault()
             history.push("/login")
